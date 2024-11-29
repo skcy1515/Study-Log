@@ -8,7 +8,7 @@
 # 스프링 부트란?
 스프링 부트는 스프링 프레임 워크를 더 쉽고 빠르게 이용할 수 있도록 만들어주는 도구이다. 스프링 부트는 자동으로 개발 환경 구성을 해주고, WAS(web application server)를 자체적으로 가지고 있다.
 
-![image](https://github.com/user-attachments/assets/3c4fe2c8-9102-496c-a70c-f2a2e3aabe43)
+![image](https://github.com/user-attachments/assets/37542d10-ae4b-420f-b035-8702d99acb30)
 
 # 스프링의 주요 특징
 ### IoC (제어의 역전) / DI (의존성 주입)
