@@ -33,7 +33,7 @@ CREATE TABLE 테이블이름
 ```
 
 데이터 타입
-![image](https://github.com/user-attachments/assets/df50a8dc-0413-4040-91db-f6b0dd8dba06)
+![image](https://github.com/user-attachments/assets/7eaf50ef-cb76-466f-aa4c-dda575b49cdd)
 
 널값의 허용 여부 : NULL, NOT NULL
 - NOT NULL : 널 값을 허용하지 않음(필수적입력)
@@ -131,7 +131,7 @@ DROP CONSTRAINT 제약조건이름
   - 무결성 제약 조건을 만족하는 경우 데이터베이스에 저장된 모든 데이터가 정확한 상태로 저장될 수 있음을 보장
   - 데이터베이스의 데이터에 어떤 변경이 있을 때, DBMS가 자동적으로 무결성 제약조건을 검사하므로 응용 프로그램들은 이러한 제약조건을 검사할 필요가 없음
 
-![image](https://github.com/user-attachments/assets/d70eb86c-23c9-445b-b264-85185261d242)
+![image](https://github.com/user-attachments/assets/62d9c079-1c2a-4cb6-8784-58c4ceb62e5c)
 
 ## 도메인 무결성
 ### NOT NULL
@@ -216,9 +216,18 @@ INSERT INTO test_tbl4 VALUES (4, 20); -- 안 됨
   - 부모 릴레이션 : 외래 키가 참조하는 기본 키를 가진 릴레이션
 - 외래키 속성과 그것이 참조하는 기본키 속성의 이름은 달라도 되지만 도메인은 같아야 한다.
 
-![image](https://github.com/user-attachments/assets/962e4036-742c-4bbc-a2f9-9df19e71222f)
+![image](https://github.com/user-attachments/assets/908d1a97-5627-48d7-89cb-90b2c9dfa7f3)
 
-![image](https://github.com/user-attachments/assets/a4f3698a-fa6d-4381-bd16-c68d693a272a)
+기본 문법
+
+```
+컬럼명 데이터형,
+…….,
+[CONSTRAINT 제약조건이름]
+FOREIGN KEY (컬럼명 1 [, 컬럼명 2, ….])
+REFERENCES 테이블명(컬럼명 1 [, 컬럼명 2, ….] [ON
+DELETE CASCADE])
+```
 
 예(test_tbl6 테이블의 fk2를 test_tbl4의 pk1을 참조할수 있도록 외래 키 지정): 
 
