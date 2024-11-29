@@ -257,7 +257,7 @@ INSERT INTO test_tbl6 VALUES (500, 4); -- 오류
 
 만약 ON DELETE CASCADE 없이, 외래키가 있는데 부모의 기본 키를 삭제할 경우 에러가 뜬다.
 
-![image](https://github.com/user-attachments/assets/9281742f-3a2c-45ca-a125-5255668dd0ca)
+![image](https://github.com/user-attachments/assets/3fc5a3ad-5438-49a6-9363-8ba1a59f2874)
 
 예:
 
