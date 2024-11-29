@@ -50,7 +50,7 @@ FROM 테이블이름
 - SELECT DISTINCT 속성이름 FROM 테이블 이름: 중복된 투플들을 하나씩만 나타나게 함
 
 ## WHERE
-![image](https://github.com/user-attachments/assets/c00fce02-d3b5-45ed-9f8d-c35b89d2ea67)
+![image](https://github.com/user-attachments/assets/a750d4bf-c58f-46c0-8c8a-f52687a583c5)
 
 - WHERE 속성명 BETWEEN 최소값 AND 최대값: 최소 값과 최대 값 사이의 범위에 들어가는지 여부파악, 최소 값과 최대 값도 범위에 포함됨
 - WHERE 속성명 IN (숫자 값, '문자'): 목록 안의 값 중 하나(OR)와 일치하는지 여부를 파악하는데 사용
@@ -195,11 +195,7 @@ WHERE 조건
 GROUP BY 속성명
 ```
 
-![image](https://github.com/user-attachments/assets/54be2aa6-9b0e-482b-88ab-ad7bb332caf9)
-
-![image](https://github.com/user-attachments/assets/caee86f6-cfaf-42f8-963e-3e61af936a16)
-
-![image](https://github.com/user-attachments/assets/099e2fa4-6811-48d3-b355-a3730d02bd51)
+![image](https://github.com/user-attachments/assets/bba1d2dd-e280-4532-95ae-eff388b77ea9)
 
 ### HAVING
 그룹에 대한 조건, GROUP BY 절을 적용해서 나온 결과 값 중에서 원하는 조건에 부합하는 자료만 산출하고 싶을 때 사용
@@ -217,9 +213,9 @@ GROUP BY 속성명
 HAVING 검색조건
 ```
 
-![image](https://github.com/user-attachments/assets/06d7df56-ac4b-4c6e-9607-d5e5f8233606)
+![image](https://github.com/user-attachments/assets/656d28a5-96d0-4fe0-9dd7-8e6dd1ff8cf9)
 
-![image](https://github.com/user-attachments/assets/63426574-eeac-4b40-8088-44b183efd849)
+![image](https://github.com/user-attachments/assets/f3da933b-4ac7-48bf-9507-6970683c3a18)
 
 # 조인
 1개 이상의 릴레이션으로부터 연관된 튜플을 결합하는 것, 속성들간 공통된 값(기본 키와 외래 키)을 사용하여 조인 실행
@@ -233,17 +229,19 @@ FROM table1, table2
 WHERE table1.column1 = table2.column1 [and <검색조건>]
 ```
 
-![image](https://github.com/user-attachments/assets/a9b18923-1519-4da5-8ca1-327f37734ab0)
+![image](https://github.com/user-attachments/assets/def082b2-2d96-4454-8ace-e107c544dfc8)
 
 테이블 별칭: 테이블 별칭을 이용하여 긴 테이블 이름을 간단하게 사용, 테이블 이름 대신에 별칭 사용
 
-![image](https://github.com/user-attachments/assets/50f22e57-5dd9-4aff-bfb3-c5baa08a6df7)
-
+```
+SELECT e.empno,ename, job, d.dname, loc
+FROM emp e INNER JOIN dept d
+ON e.deptno = d.deptno
+WHERE sal>=2000;
+```
 
 ## 외부 조인
 내부 조인은 조인하는 테이블의 두 개의 속성에서 공통된 값이 없다면 테이블로부터 행을 반환하지 않는다. 정상적으로 조인 조건을 만족하지 못하는 행들을 보기위해 외부 조인 사용
-
-![image](https://github.com/user-attachments/assets/609a2eac-4405-4d29-9a02-7465c411e081)
 
 ```
 SELECT a.deptno, b.deptno
@@ -277,32 +275,53 @@ FROM emp
 ```
 
 ## from 절에서 사용
-![image](https://github.com/user-attachments/assets/29cfbbb1-9bdc-4549-9fa6-1d4c296d12bb)
+![image](https://github.com/user-attachments/assets/464a5c45-1b56-4d94-bb0b-dadfe0b69e9d)
 
 ## where절에서 사용 (단일 행 부속질의)
 오직 하나의 행을 반환, 단일 행 연산자(=,>, >=, <, <=, <>, !=) 만 사용가능
 
-![image](https://github.com/user-attachments/assets/3ccbd181-0dc6-4ce2-ac63-0acc03a100ef)
+![image](https://github.com/user-attachments/assets/e42bdf6b-5076-46a8-937b-0d34e3000086)
 
 ## where절에서 사용 (다중 행 부속질의)
 1개 이상의 행을 반환하는 부속질의, 복수 행 연산자(IN, NOT IN) 사용 가능
 
-![image](https://github.com/user-attachments/assets/7ecd34f3-6eae-4f5b-bc1f-94f274d77d2f)
+![image](https://github.com/user-attachments/assets/71c591fc-a711-467e-b7b8-d4f8c1f232b5)
 
 ## where절에서 사용 (다중 열 부속질의)
 부속질의의 결과값이 2개 이상의 열을 반환하는 부속질의
 
-![image](https://github.com/user-attachments/assets/b5addd90-a88c-48b1-916b-126a5445613a)
+![image](https://github.com/user-attachments/assets/b0464af8-fef2-469b-9a8a-bf71069f0822)
 
 # 집합 연산
 ## UNION (합집합)
-![image](https://github.com/user-attachments/assets/70130598-35cc-4eca-9366-5b3af4ba84e0)
+
+예:
+
+```
+SELECT deptno FROM emp
+UNION
+SELECT deptno FROM dept
+```
 
 ## INTERSECT (교집합)
-![image](https://github.com/user-attachments/assets/31165c53-7d92-437c-9f26-4d7248dc12f3)
+
+예:
+
+```
+SELECT deptno FROM emp
+INTERSECT
+SELECT deptno FROM dept
+```
 
 ## MINUS (차집합)
-![image](https://github.com/user-attachments/assets/60043bd0-0ee4-4d08-834d-f6977a498a5f)
+
+예:
+
+```
+SELECT deptno FROM dept
+MINUS
+SELECT deptno FROM emp
+```
 
 # 검색 예시
 emp (empno, ename, job, sal, comm, deptno)
