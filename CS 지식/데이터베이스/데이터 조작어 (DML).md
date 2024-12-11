@@ -358,14 +358,14 @@ ORDER BY student.student_number ASC;
 
 부속 질의 사용
 ```
-SELECT student_id, student_name
-FROM students
-WHERE student_id IN (
-    SELECT student_id
-    FROM enrollments
-    WHERE course_id = '1167'
+SELECT student_number, student_name
+FROM student
+WHERE student_number IN (
+    SELECT student_number
+    FROM class
+    WHERE subject_number = '1167'
 )
-ORDER BY student_id ASC;
+ORDER BY student_number ASC;
 ```
 
 4. 어떤 학생도 수강하지 않은 과목의 과목번호를 검색하라
