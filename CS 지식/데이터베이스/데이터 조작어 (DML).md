@@ -324,31 +324,10 @@ SELECT deptno FROM emp
 ```
 
 # 검색 예시
-emp (empno, ename, job, sal, comm, deptno)
-사원 정보 (사원 번호, 사원 이름, 업무, 연봉, 성과수당, 부서번호)
-
-dept (deptno, dname)
-부서 정보 (부서 번호, 부서 이름)
-
-salgrade (grade, losal, hisal)
-연봉 등급 (등급, 최소연봉, 최대연봉)
-
-연봉 평균이 연봉등급상 2 이상 4 이하인 업무 중, 성과수당을 받는 업무는 제외한 업무를 가진 사원의 정보(사원이름, 소속부서이름, 업무, 연봉)를 이름 순으로 정렬하여 검색하라.
-
-```
-SELECT ename, dname, job, sal
-FROM emp
-INNER JOIN dept
-ON emp.deptno = dept.deptno
-WHERE job IN (SELECT job FROM emp GROUP BY job HAVING AVG(sal) >= (
-SELECT losal FROM salgrade WHERE grade = 2
-) AND AVG(sal) <= (
-SELECT hisal FROM salgrade WHERE grade = 4
-) INTERSECT SELECT job FROM emp WHERE comm IS NULL) ORDER BY ename
-```
-
 student (student_number, student_name, student_year)
+
 subject (subject_number, subject_name)
+
 class (student_number, subject_number, class_year)
 
 1. 과목이름이 ‘데이터베이스'인 과목의 과목번호를 검색하라.
@@ -366,6 +345,8 @@ WHERE student_name LIKE '황%';
 ```
 
 3. 과목번호 ‘1167’를 수강한 학생의 학번과 학생이름을 검색하라(학번 오름차순 정렬하여 검색할 것)
+
+조인 사용
 ```
 SELECT student.student_number, student_name
 FROM student
@@ -375,26 +356,29 @@ WHERE class.subject_number = 1167
 ORDER BY student.student_number ASC;
 ```
 
+부속 질의 사용
+```
+SELECT student_id, student_name
+FROM students
+WHERE student_id IN (
+    SELECT student_id
+    FROM enrollments
+    WHERE course_id = '1167'
+)
+ORDER BY student_id ASC;
+```
+
 4. 어떤 학생도 수강하지 않은 과목의 과목번호를 검색하라
 ```
 SELECT subject_number
 FROM subject
 WHERE subject_number NOT IN (
-SELECT DISTINCT subject_number
+SELECT subject_number
 FROM class
 );
 ```
 
-5. 과목번호 ‘1167’을 수강한 학생들의 학년을 검색하라. 이때 동일한 학년이 중복되어서 나타나지 않도록 한다.
-```
-SELECT DISTINCT student_year
-FROM student
-INNER JOIN class
-ON student.student_number = class.student_number
-WHERE class.subject_number = 1167;
-```
-
-6. 2학년 학생이 수강한 과목의 과목번호와 과목이름을 검색하라. (주의사항 : 부속질의를 사용할 것)
+5. 2학년 학생이 수강한 과목의 과목번호와 과목이름을 검색하라. (주의사항 : 부속질의를 사용할 것)
 ```
 SELECT subject_number, subject_name
 FROM subject
@@ -407,12 +391,11 @@ WHERE student.student_year = 2
 );
 ```
 
-7. 2024 년도에 2개 이상의 과목을 수강한 학생의 학번에 대해, 학번과 해당 학생이 수강한 교과목의 총 갯수를 검색하라.
+6. 2024 년도에 2개 이상의 과목을 수강한 학생의 학번에 대해, 학번과 해당 학생이 수강한 교과목의 총 갯수를 검색하라.
 ```
-SELECT class.student_number, COUNT(class.subject_number)
-AS 수강한_과목_갯수
-FROM class
-WHERE class_year = 2024
-GROUP BY class.student_number
-HAVING COUNT(class.subject_number) >= 2;
+SELECT c.student_number, COUNT(c.subject_number) AS total_subjects
+FROM class c
+WHERE c.class_year = 2024
+GROUP BY c.student_number
+HAVING COUNT(c.subject_number) >= 2;
 ```
