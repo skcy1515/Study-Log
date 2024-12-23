@@ -1,6 +1,21 @@
 # 엔티티
 엔티티는 데이터베이스의 테이블과 매핑되는 객체이다. 
 
+### 주제: 게시판 시스템 (Post와 Comment는 1:N 관계)
+1. Post 엔티티 (게시글)
+- id: 게시글 고유 ID (Long)
+- title: 게시글 제목 (String)
+- content: 게시글 내용 (String)
+- author: 작성자 이름 (String)
+- createdAt: 작성 일자 (LocalDateTime)
+
+2. Comment 엔티티 (댓글)
+- id: 댓글 고유 ID (Long)
+- content: 댓글 내용 (String)
+- author: 작성자 이름 (String)
+- createdAt: 작성 일자 (LocalDateTime)
+- post: 댓글이 속한 게시글 (Post)
+
 # 코드
 
 ### builder
