@@ -25,6 +25,7 @@ public class PostResponse {
         this.id = postEntity.getId();
         this.title = postEntity.getTitle();
         this.content = postEntity.getContent();
+        this.author = postEntity.getAuthor();
         this.createdAt = postEntity.getCreatedAt();
         this.updatedAt = postEntity.getUpdatedAt();
         this.comments = postEntity.getComments().stream()
