@@ -20,3 +20,14 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 ```
 
 # 코드
+```
+public interface PostRepository extends JpaRepository<PostEntity, Long> {
+}
+```
+[PostRepository](https://github.com/skcy1515/Study-Log/blob/main/%EC%8A%A4%ED%94%84%EB%A7%81/RESTful%20API%20%EB%A7%8C%EB%93%A4%EA%B8%B0/demo/src/main/java/com/example/demo/repository/PostRepository.java)
+
+```
+public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
+}
+```
+[CommentRepository](https://github.com/skcy1515/Study-Log/blob/main/%EC%8A%A4%ED%94%84%EB%A7%81/RESTful%20API%20%EB%A7%8C%EB%93%A4%EA%B8%B0/demo/src/main/java/com/example/demo/repository/CommentRepository.java)
