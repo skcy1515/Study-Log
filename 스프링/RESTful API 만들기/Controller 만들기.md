@@ -5,5 +5,83 @@
 2. 요청에 따라 필요한 서비스 메서드를 호출하고, 결과를 클라이언트에게 반환한다.
 3. 클라이언트가 웹 페이지를 요청하는 경우 `@Controller`를 사용하고, API 응답(JSON 등)을 반환할 때는 `@RestController`를 사용한다.
 
-# 코드
+# [코드](https://github.com/skcy1515/Study-Log/blob/main/%EC%8A%A4%ED%94%84%EB%A7%81/RESTful%20API%20%EB%A7%8C%EB%93%A4%EA%B8%B0/demo/src/main/java/com/example/demo/Controller/PostApi.java)
+```
+@RestController
+@RequiredArgsConstructor
+public class PostApi {
+
+    private final PostService postService;
+
+    // 게시물 생성
+    @PostMapping("/post")
+    public ResponseEntity<Void> createPost(
+            @RequestBody PostRequest postRequest
+    ) {
+        postService.createPost(postRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    // 댓글 생성
+    @PostMapping("/post/{postId}/comment")
+    public ResponseEntity<Void> createComment(
+            @PathVariable Long postId,
+            @RequestBody CommentRequest commentRequest
+    ) {
+        postService.createComment(postId, commentRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    // 게시물 변경
+    @PutMapping("/post/{postId}")
+    public ResponseEntity<Void> editPost(
+            @PathVariable Long postId,
+            @RequestBody PostRequest postRequest
+    ) {
+        postService.editPost(postId, postRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    // 댓글 변경
+    @PutMapping("/comment/{commentId}")
+    public ResponseEntity<Void> editComment(
+            @PathVariable Long commentId,
+            @RequestBody CommentRequest commentRequest
+    ) {
+        postService.editComment(commentId, commentRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    // 게시글 삭제 (해당 댓글들도 함께 삭제)
+    @DeleteMapping("/post/{postId}")
+    public ResponseEntity<Void> deletePost(
+            @PathVariable Long postId
+    ) {
+        postService.deletePost(postId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    // 댓글 삭제
+    @DeleteMapping("/comment/{commentId}")
+    public ResponseEntity<Void> deleteComment(
+            @PathVariable Long commentId
+    ) {
+        postService.deleteComment(commentId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    // 특정 게시물과 그 댓글들 조회
+    @GetMapping("/post/{postId}")
+    public ResponseEntity<PostResponse> getPostWithComments(@PathVariable Long postId) {
+        PostResponse postResponse = postService.getPostWithComments(postId);
+        return ResponseEntity.ok(postResponse);
+    }
+
+    // 모든 게시물 조회
+    @GetMapping("/posts")
+    public ResponseEntity<List<PostResponse>> getAllPosts() {
+        List<PostResponse> postResponses = postService.getAllPosts();
+        return ResponseEntity.ok(postResponses);
+    }
+}
 ```
