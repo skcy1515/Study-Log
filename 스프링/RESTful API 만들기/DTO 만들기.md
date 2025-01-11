@@ -81,6 +81,9 @@ public class CommentResponse {
 @AllArgsConstructor
 @NoArgsConstructor
 ```
+- `@NoArgsConstructor`: 파라미터 없는 기본 생성자를 자동 생성
+- `@AllArgsConstructor`: 모든 필드를 매개변수로 받는 생성자를 자동 생성
+- `@Getter`: 모든 필드에 대해 getter 메서드를 자동 생성
 
 ## 2. PostRequest
 
