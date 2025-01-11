@@ -73,3 +73,19 @@ public class CommentResponse {
 }
 ```
 [CommentResponse](https://github.com/skcy1515/Study-Log/blob/main/%EC%8A%A4%ED%94%84%EB%A7%81/RESTful%20API%20%EB%A7%8C%EB%93%A4%EA%B8%B0/demo/src/main/java/com/example/demo/DTO/CommentResponse.java)
+
+# 코드 설명
+## 1. 어노테이션
+```
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+```
+
+## 2. PostRequest
+
+## 3. CommentRequest
+
+## 4. PostResponse
+
+## 5. CommentResponse
