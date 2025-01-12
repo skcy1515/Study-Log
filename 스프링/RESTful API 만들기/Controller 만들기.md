@@ -108,3 +108,46 @@ public ResponseEntity<Void> createPost(@RequestBody PostRequest postRequest) {
     return ResponseEntity.status(HttpStatus.CREATED).build();
 }
 ```
+- 클라이언트에서 전송된 게시글 데이터를 받아 새로운 게시글을 생성
+- `@RequestBody PostRequest postRequest`: 요청 본문(body)의 JSON 데이터를 PostRequest 객체로 매핑
+- `postService.createPost(postRequest)`: 서비스 계층의 createPost 메서드를 호출하여 게시글 생성 로직 처리
+- `ResponseEntity.status(HttpStatus.CREATED).build()`: HTTP 상태 코드 201(CREATED)을 클라이언트에게 응답
+
+## 4. 댓글 생성
+```
+@PostMapping("/post/{postId}/comment")
+public ResponseEntity<Void> createComment(
+        @PathVariable Long postId,
+        @RequestBody CommentRequest commentRequest
+) {
+    postService.createComment(postId, commentRequest);
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+}
+```
+- 클라이언트에서 전송된 게시글 데이터를 받아 새로운 댓글을 생성
+- `@PathVariable Long postId`: URL 경로에 포함된 {postId} 값을 추출해 변수로 전달
+- `@RequestBody CommentRequest commentRequest`: 요청 본문(body)의 JSON 데이터를 CommentRequest 객체로 매핑
+- `postService.createComment(postId, commentRequest)`: 서비스 계층의 createComment 메서드를 호출하여 댓글 생성 로직 처리
+- `ResponseEntity.status(HttpStatus.CREATED).build()`: HTTP 상태 코드 201(CREATED)을 클라이언트에게 응답
+
+## 5. 특정 게시물과 댓글 조회
+```
+@GetMapping("/post/{postId}")
+public ResponseEntity<PostResponse> getPostWithComments(@PathVariable Long postId) {
+    PostResponse postResponse = postService.getPostWithComments(postId);
+    return ResponseEntity.ok(postResponse);
+}
+```
+- `postService.getPostWithComments(postId)`: postId로 게시글을 조회하고, PostResponse 객체로 변환
+- `ResponseEntity.ok(postResponse)`: HTTP 상태 코드 200(OK)과 함께 게시글 데이터를 JSON 형식으로 응답
+
+## 6. 모든 게시물 조회
+```
+@GetMapping("/posts")
+public ResponseEntity<List<PostResponse>> getAllPosts() {
+    List<PostResponse> postResponses = postService.getAllPosts();
+    return ResponseEntity.ok(postResponses);
+}
+```
+- `postService.getAllPosts()`: 데이터베이스에서 모든 게시글을 조회하고, PostResponse 리스트로 변환
+- `ResponseEntity.ok(postResponses)`: HTTP 상태 코드 200(OK)과 함께 게시글 리스트 데이터를 JSON 형식으로 응답
