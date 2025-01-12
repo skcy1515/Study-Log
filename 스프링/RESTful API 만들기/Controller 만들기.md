@@ -85,3 +85,26 @@ public class PostApi {
     }
 }
 ```
+# 코드 설명
+## 1. 어노테이션
+```
+@RestController
+@RequiredArgsConstructor
+```
+- `@RestController`: 이 클래스가 REST API 요청을 처리하는 컨트롤러임을 나타낸다
+- `@RequiredArgsConstructor`: 롬복(Lombok)에서 제공하는 어노테이션으로, final이나 @NonNull로 선언된 모든 필드에 대해 생성자를 자동으로 생성, 의존성 주입 시 사용되며, 주입 방식을 생성자 주입으로 고정
+
+## 2. 필드
+```
+private final PostService postService;
+```
+- `postService`: 비즈니스 로직을 처리하는 서비스 계층 객체를 주입받는다
+
+## 3. 게시물 생성
+```
+@PostMapping("/post")
+public ResponseEntity<Void> createPost(@RequestBody PostRequest postRequest) {
+    postService.createPost(postRequest);
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+}
+```
