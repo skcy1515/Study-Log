@@ -1,0 +1,27 @@
+* {
+  font-family: "Black Han Sans", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.page {
+  margin: 10px auto;
+  width: 300px;
+  /* width가 없으면 블록 요소(div 등)는 기본적으로 부모 요소의 전체 너비를 차지하므로 auto 마진이 적용되지 않는다. */
+  /* width가 존재하면 요소의 크기가 지정되므로 브라우저가 남은 공간을 자동으로 나누어 좌우 마진을 동일하게 만들어 중앙 정렬된다. */
+}
+
+.mytitle {
+  width: 300px;
+  height: 200px;
+
+  background-image: url("https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg");
+  background-position: center; /* 배경 이미지를 중앙 정렬한다. */
+  background-size: cover; /* 배경 이미지를 요소 크기에 맞춰 조절한다. */
+
+  border-radius: 10px;
+  padding-top: 40px;
+
+  color: white;
+  text-align: center;
+}
