@@ -111,7 +111,7 @@ CSS는 Cascading Style Sheet의 약자입니다. 여기서 'Cascading'은 '폭�
 }
 ```
 
-### 자주 쓰이는 스타
+### 자주 쓰이는 스타일
 ```
 [배경]
 background-color
@@ -131,4 +131,84 @@ color (*주의: font-color가 아니라 그냥 color에요!)
 [간격]
 margin (바깥 여백)
 padding (안쪽 여백)
+```
+
+## 연습 (login.html)
+![image](https://github.com/user-attachments/assets/22b8229f-c587-4802-9d97-211105f3af3f)
+
+```
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>로그인 페이지</title>
+    <style>
+      .page {
+        margin: 10px auto;
+        width: 300px;
+        /* width가 없으면 블록 요소(div 등)는 기본적으로 부모 요소의 전체 너비를 차지하므로 auto 마진이 적용되지 않는다. */
+        /* width가 존재하면 요소의 크기가 지정되므로 브라우저가 남은 공간을 자동으로 나누어 좌우 마진을 동일하게 만들어 중앙 정렬된다. */
+      }
+
+      .mytitle {
+        width: 300px;
+        height: 200px;
+
+        background-image: url("https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg");
+        background-position: center; /* 배경 이미지를 중앙 정렬한다. */
+        background-size: cover; /* 배경 이미지를 요소 크기에 맞춰 조절한다. */
+
+        border-radius: 10px;
+        padding-top: 40px;
+
+        color: white;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="mytitle">
+        <h1>로그인 페이지</h1>
+        <p1>아이디, 비밀번호를 입력해주세요</p1>
+      </div>
+      <div>
+        <p>ID: <input type="text" /></p>
+        <p>PW: <input type="text" /></p>
+        <button>로그인하기</button>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
+## 구글 웹폰트 입히기
+1. https://fonts.google.com/?script=Kore 사이트에서, 마음에 드는 폰트를 골라 클릭
+2. Get font -> Get embed code 클릭
+3. 코드 복사 붙여넣기
+![image](https://github.com/user-attachments/assets/4dbaeb13-ce95-4cc1-b33e-c5f6b643c577)
+
+```
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <title>로그인 페이지</title>
+    <style>
+      * {
+        font-family: "Black Han Sans", serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+```
+![image](https://github.com/user-attachments/assets/ad0a906a-b381-4a97-a8d6-014b8defdcdf)
+
+## CSS 분리
+기존의 코드들을 style.css에 전부 옮기고 head에 코드 추가
+```
+    <link rel="stylesheet" type="text/css" href="style.css" />
 ```
