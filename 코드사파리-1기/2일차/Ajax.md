@@ -135,3 +135,141 @@ $.ajax({
 });
 ```
 ![image](https://github.com/user-attachments/assets/5b5080bd-986e-44c3-8705-42eda381abf2)
+
+## Ajax 연습 (practice4.html)
+![image](https://github.com/user-attachments/assets/1f7d19ff-ba5e-4063-bc29-286d15151798)
+
+```
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>jQuery 연습하고 가기!</title>
+
+    <!-- jQuery를 import 합니다 -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+
+    <style type="text/css">
+      div.question-box {
+        margin: 10px 0 20px 0;
+      }
+    </style>
+
+    <script>
+      function q1() {
+        // 받아온 데이터를 그려주기 전, 기존에 그려진 데이터가 있다면 지워줍니다.
+        if ($("#names-q1").children().length > 0) {
+          // 내용이 있으면 추가하지 않음
+          return;
+        }
+
+        $.ajax({
+          type: "GET",
+          url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+          data: {},
+          success: function (response) {
+            let mises = response["RealtimeCityAir"]["row"];
+            mises.forEach((mise) => {
+              let gu_name = mise["MSRSTE_NM"];
+              let gu_mise = mise["IDEX_MVL"];
+
+              let temp_html;
+
+              if (gu_mise >= 60) {
+                temp_html = `<span style="color: red; font-weight: bold;"><li>${gu_name} : ${gu_mise}<span>`;
+              } else {
+                temp_html = `<li>${gu_name} : ${gu_mise}`;
+              }
+              $("#names-q1").append(temp_html);
+            });
+          },
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>jQuery+Ajax의 조합을 연습하자!</h1>
+
+    <hr />
+
+    <div class="question-box">
+      <h2>1. 서울시 OpenAPI(실시간 미세먼지 상태)를 이용하기</h2>
+      <p>모든 구의 미세먼지를 표기해주세요</p>
+      <p>업데이트 버튼을 누를 때마다 지웠다 새로 씌여져야 합니다.</p>
+      <button onclick="q1()">업데이트</button>
+      <ul id="names-q1"></ul>
+    </div>
+  </body>
+</html>
+```
+
+## 랜덤 고양이 사진 띄우기 (practice5.html)
+![image](https://github.com/user-attachments/assets/d982b2cd-e9eb-4bc7-ac68-4815beb4548a)
+
+```
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JQuery 연습하고 가기!</title>
+
+    <!-- jQuery를 import 합니다 -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+
+    <style type="text/css">
+      div.question-box {
+        margin: 10px 0 20px 0;
+      }
+      div.question-box > div {
+        margin-top: 30px;
+      }
+    </style>
+
+    <script>
+      function q1() {
+        $.ajax({
+          type: "GET",
+          url: "https://api.thecatapi.com/v1/images/search",
+          data: {},
+          success: function (response) {
+            // response[0]에서 URL, width, height 추출
+            let url = response[0]["url"];
+
+            $("#img-cat")
+              .attr("src", url)
+              .attr("width", 500)
+              .attr("height", 300);
+          },
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>JQuery+Ajax의 조합을 연습하자!</h1>
+
+    <hr />
+
+    <div class="question-box">
+      <h2>3. 랜덤 고양이 사진 API를 이용하기</h2>
+      <p>예쁜 고양이 사진을 보여주세요</p>
+      <p>업데이트 버튼을 누를 때마다 지웠다 새로 씌여져야 합니다.</p>
+      <button onclick="q1()">고양이를 보자</button>
+      <div>
+        <img
+          id="img-cat"
+          src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+        />
+      </div>
+    </div>
+  </body>
+</html>
+```
