@@ -161,3 +161,9 @@ db.users.update_one({'name':'bobby'},{'$set':{'age':19}})
 # 지우기 - 예시
 db.users.delete_one({'name':'bobby'})
 ```
+
+# MongoDBCompass 실행
+1. Add new connection 버튼을 눌러주세요
+![image](https://github.com/user-attachments/assets/b0da442a-485c-44af-abfd-e6f116480d8b)
+2. URL 칸에 위에서 저장해둔 uri 입력, name 칸에 db_jungle 입력, Color 칸은 자유롭게 설정하고 Save & Connect 클릭해 주세요
+
