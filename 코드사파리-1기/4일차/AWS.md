@@ -181,7 +181,7 @@ cd ~
 cd jungle
 
 # jungle 디렉토리에 가상환경 활성화하기
-python -m venv jungle_env
+source .venv/Scripts/activate
 
 # 3. 가상 환경 활성화
 source jungle_env/bin/activate
