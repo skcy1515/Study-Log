@@ -132,6 +132,7 @@ source myenv/bin/activate #가상환경 활성화
 pip install flask
 
 deactivate # 가상환경 끄기
+rm -rf myenv # 가상환경 삭제
 ```
 flask 설치 (가상환경 이용)
 
@@ -172,3 +173,87 @@ http://13.124.230.229:5000/
 접속하면 화면이 뜬다.
 
 # 서버에 나홀로 링크 메모장 업로드
+```
+# home으로 이동하기
+cd ~
+
+# jungle 폴더(디렉토리)로 이동하기
+cd jungle
+
+# jungle 디렉토리에 가상환경 활성화하기
+python -m venv jungle_env
+
+# 3. 가상 환경 활성화
+source jungle_env/bin/activate
+
+
+# 패키지 설치하기
+pip install flask requests beautifulsoup4 pymongo
+```
+실행하기 전 사용하는 패키지를 설치 (가상환경 이용)
+
+```
+http://13.124.230.229:5000/
+```
+
+![image](https://github.com/user-attachments/assets/795a442b-19e8-44f9-b65c-26fe506b2eed)
+
+# 서버 완성
+## 포트포워딩
+- 지금은 5000포트에서 웹 서비스가 실행되고 있습니다. 그래서 매번 :5000이라고 뒤에 붙여줘야 하죠. 뒤에 붙는 포트 번호를 없애려면 어떻게 해야할까요?
+- http 요청에서는 80포트가 기본이기 때문에, 굳이 :80을 붙이지 않아도 자동으로 연결이 됩니다.
+- 포트 번호를 입력하지 않아도 자동으로 접속되기 위해, 우리는 80포트로 오는 요청을 5000 포트로 전달하게 하는 포트포워딩(port forwarding) 을 사용하겠습니다.
+- Linux(리눅스)에서 기본으로 제공해 주는 포트포워딩을 사용할 것입니다. 그림으로 보면 아래와 같습니다.
+
+![image](https://github.com/user-attachments/assets/aeef7305-572b-44b6-af1f-a38d46545d0d)
+
+### 포트 번호 없애기 - Linux 자체 포트포워딩을 작동시키기
+```
+sudo iptables -t nat -A PREROUTING -i enX0 -p tcp --dport 80 -j REDIRECT --to-port 5000
+```
+포트포워딩 룰 입력
+
+```
+http://13.124.230.229/
+```
+다시 들어가보기
+
+## nohup 설정
+Git bash 또는 Mac의 터미널을 종료하면 (=즉, SSH 접속을 끊으면) 프로세스가 종료되면서, 서버가 돌아가지 않고 있습니다. 그러나 우리가 원격접속을 끊어도, 서버는 계속 동작해야겠죠?
+
+```
+# 아래의 명령어로 실행하면 된다
+nohup python app.py &
+```
+원격 접속을 종료하더라도 서버가 계속 돌아가게 하기
+
+![image](https://github.com/user-attachments/assets/54241a85-9087-4ee0-8e9b-06044b0a450b)
+
+서버 종료하기 - 강제종료하는 방법
+ 
+프로세스 번호는 빨간 화살표를 참고해주세요
+
+```
+# 아래 명령어로 미리 pid 값(프로세스 번호)을 본다
+ps -ef | grep 'app.py'
+
+# 아래 명령어로 특정 프로세스를 죽인다
+kill -9 [pid값]
+```
+
+## 도메인 연결
+https://www.gabia.com/
+
+가비아에서 도메인을 구매해서 진행할 예정입니다. 로그인 후, 메인 페이지에서 원하는 도메인을 검색해 주세요. 도메인을 구매한다는 것은, 네임서버를 운영해 주는 업체에, IP와 도메인 매칭 유지비를 내는 것입니다. 한국 또는 글로벌 업체 어디든 상관없지만, 우리는 한국의 '가비아'라는 회사에서 구입한 것입니다.
+
+![image](https://github.com/user-attachments/assets/e1a36655-bbb6-4f69-93e2-71f8706fcd20)
+
+![image](https://github.com/user-attachments/assets/b3f21af4-10dc-46ec-a47c-d1949cadafb8)
+
+![image](https://github.com/user-attachments/assets/aaa5a527-4191-4410-896e-bec5c51b03ca)
+
+![image](https://github.com/user-attachments/assets/6613be77-8431-4a03-8014-fc0dfea3ed35)
+
+![image](https://github.com/user-attachments/assets/f3bfebdb-f427-441f-a80c-c9950ae2a6db)
+
+(호스트 이름에 @, IP주소에 IP주소를 입력합니다)
