@@ -66,7 +66,7 @@ if __name__ == '__main__':
 ```
 from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
 # 아래 uri를 복사해둔 uri로 수정하기
-uri = "mongodb+srv://skcy151515:IyuTp1jwPnkfLXXl@cluster0.es5up.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tlsAllowInvalidCertificates=true"
+uri = 
 client = MongoClient(uri, 27017)  # MongoDB는 27017 포트로 돌아갑니다.
 db = client.dbjungle                      # 'dbjungle'라는 이름의 db를 만듭니다.
 ```
@@ -87,7 +87,7 @@ db = client.dbjungle                      # 'dbjungle'라는 이름의 db를 만
 ```
 from pymongo import MongoClient
 # 아래 uri를 복사해둔 uri로 수정하기
-uri = "mongodb+srv://skcy151515:IyuTp1jwPnkfLXXl@cluster0.es5up.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tlsAllowInvalidCertificates=true"
+uri = 
 client = MongoClient(uri, 27017)  # MongoDB는 27017 포트로 돌아갑니다.
 db = client.dbjungle 
 
