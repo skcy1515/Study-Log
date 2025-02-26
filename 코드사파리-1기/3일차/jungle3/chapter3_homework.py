@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
 # 여기 uri를 설정한 MongoDB로 연결해주세요!
-uri = "mongodb+srv://skcy151515:IyuTp1jwPnkfLXXl@cluster0.es5up.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tlsAllowInvalidCertificates=true"
+uri = 
 client = MongoClient(uri, 27017)
 db = client.chapter3 # 'chapter3'라는 이름의 db를 만듭니다.
 
