@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 # 아래 uri를 복사해둔 uri로 수정하기
-uri = "mongodb+srv://skcy151515:IyuTp1jwPnkfLXXl@cluster0.es5up.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tlsAllowInvalidCertificates=true"
+uri =
 client = MongoClient(uri, 27017)  # MongoDB는 27017 포트로 돌아갑니다.
 db = client.dbjungle 
 
